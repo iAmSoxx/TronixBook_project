@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class ApiService {
   final Dio _dio = Dio();
-  final String _apiUrl = "http://testronixbackend.test/api/v1/reservations";
+  final String _apiUrl = "http://10.0.2.2:8000/api/reservation";
 
   Future<Map<String, dynamic>> makeReservation({
     required String firstName,
@@ -27,7 +27,7 @@ class ApiService {
             'time': time,
           }));
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return response.data; // returns the reservation info with ID
       } else {
         throw Exception(

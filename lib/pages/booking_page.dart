@@ -34,9 +34,10 @@ class _BookingPageState extends State<BookingPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false, 
         backgroundColor: Colors.white,
         title: const Text(
-          'Book Appointment',
+          'TronixBook',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),

@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const BookingPage(),
         '/customerDetailsPage': (context) => CustomerDetailsPage(),
+        
       },
     );
   }

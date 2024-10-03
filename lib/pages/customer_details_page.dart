@@ -1,5 +1,6 @@
 import 'package:booking_app/components/button.dart';
 import 'package:booking_app/components/custom_textfield.dart';
+import 'package:booking_app/pages/success_booked.dart';
 import 'package:booking_app/providers/booking_provider.dart';
 import 'package:booking_app/services/api_service.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,9 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
   // final TextEditingController _lastNameController = TextEditingController();
   // final TextEditingController _emailController = TextEditingController();
   // final TextEditingController _notesController = TextEditingController();
-  final maxLines = 5;
+  //final maxLines = 5;
 
   //String? _selectedVenue;
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -107,25 +106,25 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
 
                   CustomTextfield(
                     label: 'First Name',
-                    controller:  bookingProvider.firstNameController,
+                    controller: bookingProvider.firstNameController,
                   ),
                   const SizedBox(height: 20),
 
                   CustomTextfield(
                     label: 'Last Name',
-                    controller:  bookingProvider.lastNameController,
+                    controller: bookingProvider.lastNameController,
                   ),
                   const SizedBox(height: 20),
 
                   CustomTextfield(
                     label: 'Email',
-                    controller:  bookingProvider.emailController,
+                    controller: bookingProvider.emailController,
                   ),
                   const SizedBox(height: 20),
 
                   CustomTextfield(
                     label: 'Notes',
-                    controller:  bookingProvider.notesController,
+                    controller: bookingProvider.notesController,
                   ),
                   const SizedBox(height: 20),
                   const SizedBox(height: 50),
@@ -135,21 +134,36 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
                     title: 'Make a Reservation',
                     disable: false,
                     onPressed: () async {
-                      // Use ApiService to send the data to backend
-                      await ApiService().makeReservation(
-                        date: bookingProvider.dateController.text,
-                        time: bookingProvider.timeController.text,
-                        venue: bookingProvider.selectedVenue!,
-                        firstName: bookingProvider.firstNameController.text,
-                        lastName: bookingProvider.lastNameController.text,
-                        email: bookingProvider.emailController.text,
-                        notes: bookingProvider.notesController.text,
-                      );
+                      try {
+                        // Make the reservation and get the response data
+                        var reservationData =
+                            await ApiService().makeReservation(
+                          date: bookingProvider.dateController.text,
+                          time: bookingProvider.timeController.text,
+                          venue: bookingProvider.selectedVenue!,
+                          firstName: bookingProvider.firstNameController.text,
+                          lastName: bookingProvider.lastNameController.text,
+                          email: bookingProvider.emailController.text,
+                          notes: bookingProvider.notesController.text,
+                        );
 
-                      // Optional: Show a success message or navigate to another page
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Reservation Submitted!')),
-                      );
+                        bookingProvider.clearFields();
+
+                        // Navigate to the ReservationDetailsPage after successful booking
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SuccessBooked(
+                              reservationData: reservationData,
+                            ),
+                          ),
+                        );
+                      } catch (e) {
+                        // Show an error message if something goes wrong
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error: $e')),
+                        );
+                      }
                     },
                   ),
                 ],
