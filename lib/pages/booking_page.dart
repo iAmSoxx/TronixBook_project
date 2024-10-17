@@ -35,10 +35,10 @@ class _BookingPageState extends State<BookingPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false, 
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 29, 78, 216),
         title: const Text(
           'TronixBook',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
         ),
       ),
       body: Padding(
@@ -103,7 +103,7 @@ class _BookingPageState extends State<BookingPage> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                               color: _currentIndex == index
-                                  ? Colors.deepPurple
+                                  ? Color.fromARGB(255, 29, 78, 216)
                                   : null,
                             ),
                             alignment: Alignment.center,
@@ -133,6 +133,7 @@ class _BookingPageState extends State<BookingPage> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
                 child: Button(
                   width: double.infinity,
+                  height: 50,
                   title: 'Continue',
                   disable: _timeSelected && _dateSelected ? false : true,
                   onPressed: () {
@@ -159,7 +160,7 @@ class _BookingPageState extends State<BookingPage> {
       rowHeight: 48,
       calendarStyle: const CalendarStyle(
         todayDecoration:
-            BoxDecoration(color: Colors.deepPurple, shape: BoxShape.circle),
+            BoxDecoration(color: Color.fromARGB(255, 29, 78, 216), shape: BoxShape.circle),
       ),
       availableCalendarFormats: const {
         CalendarFormat.month: 'Month',

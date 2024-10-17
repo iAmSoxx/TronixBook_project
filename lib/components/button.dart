@@ -4,12 +4,14 @@ class Button extends StatelessWidget {
   const Button({
     super.key,
     required this.width,
+    required this.height,
     required this.title,
     required this.disable,
     required this.onPressed,
   });
 
   final double width;
+  final double height;
   final String title;
   final bool disable; // this is used to disable button
   final Function() onPressed;
@@ -18,9 +20,10 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
+      height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Color.fromARGB(255, 29, 78, 216),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

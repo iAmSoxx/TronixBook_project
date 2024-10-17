@@ -21,7 +21,7 @@ class SuccessBooked extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 flex: 3,
-                child: Lottie.asset('assets/success.json'),
+                child: Lottie.asset('assets/successDarkBlue1.json'),
               ),
               Container(
                 width: double.infinity,
@@ -39,6 +39,7 @@ class SuccessBooked extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Button(
                   width: double.infinity,
+                  height: 50,
                   title: 'Back to Home Page',
                   disable: false,
                   onPressed: () => Navigator.of(context).pushNamed('/'),
